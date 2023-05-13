@@ -3,13 +3,13 @@
 
 ### Funcionalidades
 --
-- CRUD de autores, editores e livros
+- CRUD de autores, editoras e livros
 
 ### Tecnologias
 --
 - **express**: para construção da API Restful
-- **mongoose**: para manipulação dados no *MongoDB*
+- **mongoose**: para manipulação de dados no *MongoDB*
 - **dotenv**: para armazenar dados sensíveis em variáveis de ambiente
-- **eslint**: para padronizar a formatação do código e entrontrar bugs
+- **eslint**: para padronizar a formatação do código e encontrar bugs
 - 
 
