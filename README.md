@@ -10,5 +10,6 @@
 - **express**: para construção da API Restful
 - **mongoose**: para manipulação dados no *MongoDB*
 - **dotenv**: para armazenar dados sensíveis em variáveis de ambiente
+- **eslint**: para padronizar a formatação do código e entrontrar bugs
 - 
 
