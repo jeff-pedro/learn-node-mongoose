@@ -1,4 +1,3 @@
-import mongoose from 'mongoose';
 import autores from '../models/Autor.js';
 
 class AutorController {
