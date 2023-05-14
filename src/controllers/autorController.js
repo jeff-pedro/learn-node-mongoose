@@ -22,7 +22,7 @@ class AutorController {
       } else {
         throw new Error('Id do Autor não localizado');
       }
-
+      
     } catch (err) {
       next(err);
     }
