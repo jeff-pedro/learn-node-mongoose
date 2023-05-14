@@ -1,11 +1,14 @@
 import mongoose from 'mongoose';
 
-const {Schema} = mongoose;
+const { Schema } = mongoose;
 
 const editoraSchema = new Schema(
   {
-    id: {type: String},
-    nome: {type: String, required: true}
+    id: { type: String },
+    nome: {
+      type: String,
+      required: [true, 'O nome da editora é obrigatório']
+    }
   },
   {
     versionKey: false
