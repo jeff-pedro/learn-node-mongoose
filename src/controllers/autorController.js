@@ -12,7 +12,7 @@ class AutorController {
     }
   };
 
-  static listarAutorPorID = async (req, res) => {
+  static listarAutorPorID = async (req, res, next) => {
     const { id } = req.params;
 
     try {
@@ -25,15 +25,7 @@ class AutorController {
       }
 
     } catch (err) {
-      if (err.message === 'Id do Autor não localizado') {
-        res.status(404).json({ message: err.message });
-      }
-
-      if (err instanceof mongoose.Error.CastError) {
-        res.status(400).json({ message: 'Um ou mais dados fornecidos estão incorretos' });
-      } else {
-        res.status(500).send({ message: 'Erro interno do servidor' });
-      }
+      next(err);
     }
   };
 
