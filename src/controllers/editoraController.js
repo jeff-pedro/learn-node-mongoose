@@ -1,3 +1,4 @@
+import NaoEncontrado from '../erros/NaoEncontrado.js';
 import editoras from '../models/Editora.js';
 
 class EditoraController {
@@ -13,9 +14,16 @@ class EditoraController {
 
   static listarEditoraPorId = async (req, res, next) => {
     const { id } = req.params;
+    
     try {
       const editoraResultado = await editoras.findById(id);
-      res.status(200).send(editoraResultado);
+
+      if(editoraResultado !== null) {
+        res.status(200).send(editoraResultado);
+      } else {
+        next(new NaoEncontrado('Id da Editora não foi localizado'));
+      }
+
     } catch (err) {
       next(err);
     }
@@ -23,9 +31,10 @@ class EditoraController {
 
   static cadastrarEditora = async (req, res, next) => {
     const editora = new editoras(req.body);
+    
     try {
       await editora.save();
-      res.status(201).send({ message: `Editora ${editora.nome} cadastrada` });
+      res.status(201).send({ message: 'Editora cadastrada com sucesso' });
     } catch (err) {
       next(err);
     }
@@ -34,9 +43,16 @@ class EditoraController {
   static atualizarEditora = async (req, res, next) => {
     const { id } = req.params;
     const novaInfo = req.body;
+    
     try {
-      await editoras.findByIdAndUpdate(id, { $set: novaInfo });
-      res.status(200).send({ message: 'Editora atualizada com sucesso' });
+      const editoraAtualizada = await editoras.findByIdAndUpdate(id, { $set: novaInfo });
+
+      if(editoraAtualizada !== null) {
+        res.status(200).send({ message: 'Editora atualizada com sucesso' });
+      } else {
+        next(new NaoEncontrado('Id da Editora não foi localizado'));
+      }
+
     } catch (err) {
       next(err);
     }
@@ -44,9 +60,16 @@ class EditoraController {
 
   static excluirEditora = async (req, res, next) => {
     const { id } = req.params;
+    
     try {
-      const editora = await editoras.findByIdAndDelete(id);
-      res.status(200).send({ message: `Editora ${editora.nome} excluída com sucesso` });
+      const editoraExcluida = await editoras.findByIdAndDelete(id);
+
+      if(editoraExcluida !== null) {
+        res.status(200).send({ message: 'Editora removida com sucesso' });
+      } else {
+        next(new NaoEncontrado('Id da Editora não foi localizado'));
+      }
+
     } catch (err) {
       next(err);
     }

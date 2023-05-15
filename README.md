@@ -17,7 +17,9 @@
 
 ### Explorado
 --
+- Tratamento dos diferentes tipos de erros: validação, operacionais e programação
 - Manipulação de erros com Middlewares do Express
+- Centralização do tratamento de erros e separação de responsabilidades
 
 ### Tecnologias
 --
