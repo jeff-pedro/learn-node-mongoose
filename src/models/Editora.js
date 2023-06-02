@@ -7,7 +7,11 @@ const editoraSchema = new Schema(
     id: { type: String },
     nome: {
       type: String,
-      required: [true, 'O nome da editora é obrigatório']
+      required: [true, 'O nome da editora é obrigatório'],
+      enum: {
+        values: ['Casa do Código', 'Alura'],
+        message: 'A editora {VALUE} não é um valor permitido'
+      }
     }
   },
   {
