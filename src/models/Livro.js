@@ -19,8 +19,11 @@ const livroSchema = new Schema({
   },
   num_paginas: {
     type: Number,
-    validate: (valor) => {
-      return valor >= 10 && valor <= 5000;
+    validate: {
+      validator: (valor) => {
+        return valor >= 10 && valor <= 5000;
+      },
+      message: 'O número de páginas deve estar entre 10 e 5000. Valor fornecido: {VALUE}'
     }
   }
 });
