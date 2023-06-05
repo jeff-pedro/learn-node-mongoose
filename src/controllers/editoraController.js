@@ -1,5 +1,5 @@
 import NaoEncontrado from '../erros/NaoEncontrado.js';
-import editoras from '../models/Editora.js';
+import { editoras } from '../models/index.js';
 
 class EditoraController {
 
