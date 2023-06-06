@@ -17,6 +17,7 @@
 - [MongoDB official docs](https://www.mongodb.com/docs/)
     - [Query and Projection Operators](https://www.mongodb.com/docs/manual/reference/operator/query/)
     - [Update Operators](https://www.mongodb.com/docs/manual/reference/operator/update/)
+    - [MongoDB Schema Design](https://www.mongodb.com/blog/post/6-rules-of-thumb-for-mongodb-schema-design)
 - [Express official docs](https://expressjs.com/)
 - [HTTP status code](https://developer.mozilla.org/pt-BR/docs/Web/HTTP/Status)
 
@@ -31,7 +32,7 @@
 ## Funcionalidades
 
 - CRUD de autores, editoras e livros
-- Busca de livros por autor
+- Busca de livros filtrado por nome do autor, editora e número de paginas
 
 
 ## Explorado
@@ -40,6 +41,9 @@
 - Manipulação de erros com Middlewares do Express
 - Centralização do tratamento de erros e separação de responsabilidades
 - [Validações](https://github.com/jeff-pedro/learn-node-mongoose/tree/03-validando_dados) nativas, personalizada e globais nos Schemas do Mongoose
+- [Filtros](https://github.com/jeff-pedro/learn-node-mongoose/tree/04-buscas_e_filtros) via query params e busca de texto com expressões regulares
+- Expressões regulares através da classe RegExp e de operadores do MongoDB
+- Uso dos operadores de comparação do MongoDB
 
 
 ## Tecnologias
