@@ -6,19 +6,21 @@ class LivroController {
 
   static listarLivros = async (req, res, next) => {
     try {
-      let { limite = 5, pagina = 1 } = req.query;
+      let { limite = 5, pagina = 1, campoOrdenacao = '_id', ordem = -1 } = req.query;
 
       limite = parseInt(limite);
       pagina = parseInt(pagina);
+      ordem = parseInt(ordem);
 
       if (limite > 0 && pagina > 0) {
         const livrosResultado = await livros.find()
+          .sort({ [campoOrdenacao]: ordem })
           .skip((pagina - 1) * limite)
           .limit(limite)
           .populate('editora', 'nome')
           .populate('autor', 'nome')
           .exec();
-  
+
         res.status(200).json(livrosResultado);
       } else {
         next(new RequisicaoIncorreta());
