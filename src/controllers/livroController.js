@@ -5,7 +5,11 @@ class LivroController {
 
   static listarLivros = async (req, res, next) => {
     try {
+      const { limite = 5, pagina = 1 } = req.query;
+
       const livrosResultado = await livros.find()
+        .skip((pagina - 1) * limite)
+        .limit(limite)
         .populate('editora', 'nome')
         .populate('autor', 'nome')
         .exec();
@@ -46,7 +50,7 @@ class LivroController {
           .populate('editora')
           .populate('autor')
           .exec();
-  
+
         res.status(200).send(livrosResultado);
       } else {
         res.status(200).send([]);
@@ -118,7 +122,7 @@ async function processaBusca(parametros) {
 
   if (nomeEditora) {
     const editora = await editoras.findOne({ nome: nomeEditora });
-   
+
     if (editora !== null) {
       busca.editora = editora._id;
     } else {
@@ -128,10 +132,10 @@ async function processaBusca(parametros) {
 
   if (nomeAutor) {
     const autor = await autores.findOne({ nome: nomeAutor });
-   
+
     if (autor !== null) {
       busca.autor = autor._id;
-    } else { 
+    } else {
       busca = null;
     }
   }
