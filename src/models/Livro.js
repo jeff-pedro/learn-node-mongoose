@@ -13,13 +13,13 @@ const livroSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'autores',
     required: [true, 'O(a) autor(a) é obrigatório'],
-    autopopulate: true
+    autopopulate: { select: 'nome' }
   },
   editora: {
     type: Schema.Types.ObjectId,
     ref: 'editoras',
     required: [true, 'A editora é obrigatória'],
-    autopopulate: true
+    autopopulate: { select: 'nome' }
   },
   num_paginas: {
     type: Number,
