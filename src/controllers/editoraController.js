@@ -5,8 +5,9 @@ class EditoraController {
 
   static listarEditoras = async (req, res, next) => {
     try {
-      const editorasResultado = await editoras.find();
-      res.status(200).send(editorasResultado);
+      const editorasResultado = editoras.find();
+      req.resultado = editorasResultado;
+      next();
     } catch (err) {
       next(err);
     }
