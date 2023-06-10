@@ -16,8 +16,6 @@ async function paginar(req, res, next) {
       .sort({ [campoOrdenacao]: ordem })
       .skip((pagina - 1) * limite)
       .limit(limite)
-      .populate('editora', 'nome')
-      .populate('autor', 'nome')
       .exec();
 
     res.status(200).json(resultadoPaginado);

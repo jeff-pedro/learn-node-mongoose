@@ -5,8 +5,13 @@ class LivroController {
 
   static listarLivros = async (req, res, next) => {
     try {
-      const livrosResultado = livros.find();
+      const livrosResultado = livros
+        .find()
+        .populate('editora', 'nome')
+        .populate('autor', 'nome');
+
       req.resultado = livrosResultado;
+
       next();
     } catch (err) {
       next(err);
@@ -44,7 +49,7 @@ class LivroController {
           .populate('autor');
 
         req.resultado = livrosResultado;
-        
+
         next();
       } else {
         res.status(200).send([]);
