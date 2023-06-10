@@ -6,7 +6,10 @@ class LivroController {
 
   static listarLivros = async (req, res, next) => {
     try {
-      const { limite = 5, pagina = 1 } = req.query;
+      let { limite = 5, pagina = 1 } = req.query;
+
+      limite = parseInt(limite);
+      pagina = parseInt(pagina);
 
       if (limite > 0 && pagina > 0) {
         const livrosResultado = await livros.find()
