@@ -1,4 +1,5 @@
 import NaoEncontrado from '../erros/NaoEncontrado.js';
+import RequisicaoIncorreta from '../erros/RequisicaoIncorreta.js';
 import { livros, autores, editoras } from '../models/index.js';
 
 class LivroController {
@@ -7,14 +8,18 @@ class LivroController {
     try {
       const { limite = 5, pagina = 1 } = req.query;
 
-      const livrosResultado = await livros.find()
-        .skip((pagina - 1) * limite)
-        .limit(limite)
-        .populate('editora', 'nome')
-        .populate('autor', 'nome')
-        .exec();
-
-      res.status(200).json(livrosResultado);
+      if (limite > 0 && pagina > 0) {
+        const livrosResultado = await livros.find()
+          .skip((pagina - 1) * limite)
+          .limit(limite)
+          .populate('editora', 'nome')
+          .populate('autor', 'nome')
+          .exec();
+  
+        res.status(200).json(livrosResultado);
+      } else {
+        next(new RequisicaoIncorreta());
+      }
     } catch (err) {
       next(err);
     }
