@@ -5,12 +5,9 @@ class LivroController {
 
   static listarLivros = async (req, res, next) => {
     try {
-      const livrosResultado = await livros.find()
-        .populate('editora', 'nome')
-        .populate('autor', 'nome')
-        .exec();
-
-      res.status(200).json(livrosResultado);
+      const livrosResultado = livros.find();
+      req.resultado = livrosResultado;
+      next();
     } catch (err) {
       next(err);
     }
@@ -20,10 +17,10 @@ class LivroController {
     const { id } = req.params;
 
     try {
-      const livroResultado = await livros.findById(id)
-        .populate('editora')
+      const livroResultado = await livros
+        .findById(id, {}, { autopopulate: false })
         .populate('autor')
-        .exec();
+        .populate('editora');
 
       if (livroResultado !== null) {
         res.status(200).send(livroResultado);
@@ -41,17 +38,14 @@ class LivroController {
       const busca = await processaBusca(req.query);
 
       if (busca !== null) {
-        const livrosResultado = await livros
-          .find(busca)
-          .populate('editora')
-          .populate('autor')
-          .exec();
-  
-        res.status(200).send(livrosResultado);
+        const livrosResultado = livros.find(busca);
+
+        req.resultado = livrosResultado;
+
+        next();
       } else {
         res.status(200).send([]);
       }
-
     } catch (err) {
       next(err);
     }
@@ -118,7 +112,7 @@ async function processaBusca(parametros) {
 
   if (nomeEditora) {
     const editora = await editoras.findOne({ nome: nomeEditora });
-   
+
     if (editora !== null) {
       busca.editora = editora._id;
     } else {
@@ -128,10 +122,10 @@ async function processaBusca(parametros) {
 
   if (nomeAutor) {
     const autor = await autores.findOne({ nome: nomeAutor });
-   
+
     if (autor !== null) {
       busca.autor = autor._id;
-    } else { 
+    } else {
       busca = null;
     }
   }
