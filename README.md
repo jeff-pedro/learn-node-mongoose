@@ -72,4 +72,4 @@
 
 ## Documentação
 
-[em breve]
+[Livraria API Docs](https://documenter.getpostman.com/view/22093498/2s93sgVVfN)
