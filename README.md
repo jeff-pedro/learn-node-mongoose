@@ -25,8 +25,28 @@
 
 ## Instalação
 
+### Configurando conexão com o banco de dados
+
+Copie e renomei o arquivo de variáveis de ambiente
+
+```
+    cp exemplo.env .env
+```
+Edite o arquivo `.env`
+
+```
+    STRING_CONEXAO_DB=<adicionar a string de conexão com o banco de dados aqui!>
+```
+
+### Executando a aplicação
+Instale as dependências
+
 ```
     npm install
+```
+Inicialize o servidor
+
+```
     npm start
 ```
 
